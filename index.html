@@ -1,3 +1,11 @@
+<html>
+<script src='https://d3js.org/d3.v5.min.js'></script>
+<style> circle {fill: lightblue; stroke: black;} </style>
+<body onload='init()'>
+<svg width=300 height=300>
+</svg>
+<script>
+async function init() {
 var svg = d3.selectAll("svg").attr("width", 300).attr("height", 300)
 var g = svg.append("g").attr("transform", "translate(50,50)");
 var x = d3.scaleLog().base(10).domain([10,150]).range([0, 200]);
@@ -12,3 +20,7 @@ Y = 200 * Math.log10(data["AverageHighwayMPG"] / 10) / Math.log10(15)
 g.append("circle").attr("cx",function(a) {return X;}).attr("cy", function (a) {return 200 -Y;}).attr("r", function(a) {return +data["EngineCylinders"] + 2;})
 
 })
+}
+</script>
+</body>
+</html>
