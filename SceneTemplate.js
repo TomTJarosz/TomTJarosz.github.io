@@ -24,29 +24,46 @@
           g.append("circle").attr("cx",function(a) {return X;}).attr("cy", function (a) {return s1 -Y;}).attr("r", function(a) {return +data["EngineCylinders"] + 2;})
         }
       }
-    })
-    if (collectOn != "") {
-      var numKeys = collectMap.length;
-      var i = 0;
-      for (key in collectMap) {
-        var collection = collectMap[key];
-        var meanCityMPG = 0;
-        var len = collection.length;
-        _.pluck(collection, "AverageCityMPG").forEach((v)=>{meanCityMPG = meanCityMPG + v;})
-        meanCityMPG = meanCityMPG / len;
-        var meanHighwayMPG = 0;
-        _.pluck(collection, "AverageHighwayMPG").forEach((v)=>{meanHighwayMPG = meanHighwayMPG + v;})
-        meanHighwayMPG = meanHighwayMPG / len;
-        var meanNumCyls = 0;
-        _.pluck(collection, "EngineCylinders").forEach((v)=>{meanNumCyls = meanNumCyls + v;})
-        meanNumCyls = meanNumCyls / len;
+    }).then(function(notUsed) {
+      if (collectOn != "") {
+        var numKeys = collectMap.length;
+        var i = 0;
+        for (key in collectMap) {
+          var collection = collectMap[key];
+          var meanCityMPG = 0;
+          var len = collection.length;
+          _.pluck(collection, "AverageCityMPG").forEach((v) => {
+            meanCityMPG = meanCityMPG + v;
+          })
+          meanCityMPG = meanCityMPG / len;
+          var meanHighwayMPG = 0;
+          _.pluck(collection, "AverageHighwayMPG").forEach((v) => {
+            meanHighwayMPG = meanHighwayMPG + v;
+          })
+          meanHighwayMPG = meanHighwayMPG / len;
+          var meanNumCyls = 0;
+          _.pluck(collection, "EngineCylinders").forEach((v) => {
+            meanNumCyls = meanNumCyls + v;
+          })
+          meanNumCyls = meanNumCyls / len;
 
-        X = s1 * Math.log10(meanCityMPG / lowRange) / Math.log10(highRange/lowRange);
-        Y = s1 * Math.log10(meanHighwayMPG / lowRange) / Math.log10(highRange/lowRange);
-        g.append("circle").attr("cx",function(a) {return X;}).attr("cy", function (a) {return s1 -Y;}).attr("r", function(a) {return +meanNumCyls + 2;}).style("fill",function() {return "hsl(" + (360 * i / numKeys).toString() + ", 100%, 50%)";});
-        svg.append("circle").attr("cx",s1).attr("cy",i * 15).attr("r", 2).style("fill", function() {return "hsl(" + (360 * i / numKeys).toString() + ", 100%, 50%)";});
-        svg.append("text").attr("x", s1 + 15).attr("y", i * 15).text(key).style("font-size", "12px").attr("alignment-baseline", "middle");
-        i = i + 1;
+          X = s1 * Math.log10(meanCityMPG / lowRange) / Math.log10(highRange / lowRange);
+          Y = s1 * Math.log10(meanHighwayMPG / lowRange) / Math.log10(highRange / lowRange);
+          g.append("circle").attr("cx", function (a) {
+            return X;
+          }).attr("cy", function (a) {
+            return s1 - Y;
+          }).attr("r", function (a) {
+            return +meanNumCyls + 2;
+          }).style("fill", function () {
+            return "hsl(" + (360 * i / numKeys).toString() + ", 100%, 50%)";
+          });
+          svg.append("circle").attr("cx", s1).attr("cy", i * 15).attr("r", 2).style("fill", function () {
+            return "hsl(" + (360 * i / numKeys).toString() + ", 100%, 50%)";
+          });
+          svg.append("text").attr("x", s1 + 15).attr("y", i * 15).text(key).style("font-size", "12px").attr("alignment-baseline", "middle");
+          i = i + 1;
+        }
       }
-    }
+    });
   }
