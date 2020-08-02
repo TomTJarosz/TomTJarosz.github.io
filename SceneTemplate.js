@@ -1,11 +1,11 @@
 
-  function graphData(dataSource, filters, title, collectOn="", lowRange=10, highRange=150, size=800, margin=150, fontSize="16px") {
+  function graphData(dataSource, filters, title, collectOn="", lowRange=10, highRange=150, size=800, margin=180, fontSize="16px") {
     var graphSize = size - 2 * margin;
     var svg = d3.selectAll("svg").attr("width", size).attr("height", size);
     title = collectOn == ""? title: title + " per " + collectOn;
     svg.append("text").attr("x", size / 3).attr("y", margin / 2).style("font-size", fontSize).text(title).attr("alignment-baseline", "middle");
-    svg.append("text").attr("x", margin / 2).attr("y", size / 2).attr("transform", "rotate(0)").style("font-size", fontSize).text("Average Highway MPG").style("text-anchor", "middle")
-    svg.append("text").attr("x",  size / 2).attr("y", size - margin / 2).style("font-size", fontSize).text("Average City MPG").attr("alignment-baseline", "middle");
+    svg.append("text").attr("x", margin / 2.1).attr("y", size / 2).attr("transform", "rotate(0)").style("font-size", fontSize).text("Average Highway MPG").style("text-anchor", "middle")
+    svg.append("text").attr("x",  size / 2.5).attr("y", size - margin / 2).style("font-size", fontSize).text("Average City MPG").attr("alignment-baseline", "middle");
     var g = svg.append("g").attr("transform", "translate(" + margin.toString() + "," + margin.toString() + ")");
     var x = d3.scaleLog().base(10).domain([lowRange,highRange]).range([0, graphSize]);
     var y = d3.scaleLog().base(10).domain([lowRange,highRange]).range([graphSize, 0]);
@@ -24,7 +24,7 @@
         } else {
           X = graphSize * Math.log10(data["AverageCityMPG"] / lowRange) / Math.log10(highRange/lowRange)
           Y = graphSize * Math.log10(data["AverageHighwayMPG"] / lowRange) / Math.log10(highRange/lowRange)
-          g.append("circle").attr("cx",function(a) {return X;}).attr("cy", function (a) {return graphSize -Y;}).attr("r", function(a) {return 8;}).style("fill", "red").append("svg:title").text(data["Make"]);
+          g.append("circle").attr("cx",function(a) {return X;}).attr("cy", function (a) {return graphSize -Y;}).attr("r", function(a) {return 8;}).style("fill", "red").append("svg:title").text(data["Make"] + "\nCity MPG: "+ (+ data["AverageCityMPG"]).toFixed(2).toString() + "\nHighway MPG: "+ (+ data["AverageHighwayMPG"]).toFixed(2).toString());
         }
       }
     }).then(function(notUsed) {
@@ -55,7 +55,7 @@
             return 8;
           }).style("fill", function () {
             return "hsl(" + (360 * i / numKeys).toString() + ", 100%, 50%)";
-          }).append("svg:title").text(key);
+          }).append("svg:title").text(key + "\nCity MPG: "+ (+ meanCityMPG).toFixed(2).toString() + "\nHighway MPG: "+ (+ meanHighwayMPG).toFixed(2).toString());
           svg.append("circle").attr("cx", size - margin + 25).attr("cy", i * 10 + margin).attr("r", 4).style("fill", function () {
             return "hsl(" + (360 * i / numKeys).toString() + ", 100%, 50%)";
           });
