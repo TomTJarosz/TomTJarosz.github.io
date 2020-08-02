@@ -2,6 +2,7 @@
   function init(dataSource, filters, title, collectOn="", lowRange=10, highRange=150, size=600, margin=150, fontSize="12px") {
     var graphSize = size - 2 * margin;
     var svg = d3.selectAll("svg").attr("width", size).attr("height", size);
+    title = collectOn == ""? title: title + " per " + collectOn;
     svg.append("text").attr("x", size / 2).attr("y", margin / 2).style("font-size", fontSize).text(title);
     var g = svg.append("g").attr("transform", "translate(" + margin.toString() + "," + margin.toString() + ")");
     var x = d3.scaleLog().base(10).domain([lowRange,highRange]).range([0, graphSize]);
@@ -58,10 +59,10 @@
           }).style("fill", function () {
             return "hsl(" + (360 * i / numKeys).toString() + ", 100%, 50%)";
           });
-          svg.append("circle").attr("cx", size - margin + 15).attr("cy", i * 15 + margin).attr("r", 4).style("fill", function () {
+          svg.append("circle").attr("cx", size - margin + 25).attr("cy", i * 15 + margin).attr("r", 4).style("fill", function () {
             return "hsl(" + (360 * i / numKeys).toString() + ", 100%, 50%)";
           });
-          svg.append("text").attr("x", size - margin + 15 + 15).attr("y", i * 15 + margin).text(key).style("font-size", "12px").attr("alignment-baseline", "middle");
+          svg.append("text").attr("x", size - margin + 25 + 15).attr("y", i * 15 + margin).text(key).style("font-size", "12px").attr("alignment-baseline", "middle");
           i = i + 1;
         }
       }
