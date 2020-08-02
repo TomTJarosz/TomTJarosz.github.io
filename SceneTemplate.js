@@ -5,7 +5,7 @@
     title = collectOn == ""? title: title + " per " + collectOn;
     svg.append("text").attr("x", size / 3).attr("y", margin / 2).style("font-size", fontSize).text(title).attr("alignment-baseline", "middle");
     svg.append("text").attr("x", margin / 2).attr("y", size / 2).attr("transform", "rotate(0)").style("font-size", fontSize).text("Average Highway MPG").style("text-anchor", "middle")
-    svg.append("text").attr("x",  size / 3).attr("y", size - margin / 2).style("font-size", fontSize).text("Average City MPG").attr("alignment-baseline", "middle");
+    svg.append("text").attr("x",  size / 2).attr("y", size - margin / 2).style("font-size", fontSize).text("Average City MPG").attr("alignment-baseline", "middle");
     var g = svg.append("g").attr("transform", "translate(" + margin.toString() + "," + margin.toString() + ")");
     var x = d3.scaleLog().base(10).domain([lowRange,highRange]).range([0, graphSize]);
     var y = d3.scaleLog().base(10).domain([lowRange,highRange]).range([graphSize, 0]);
