@@ -1,5 +1,5 @@
 
-  function graphData(dataSource, filters, title, collectOn="", lowRange=10, highRange=150, size=800, margin=200, fontSize="18px") {
+  function graphData(dataSource, filters, title, collectOn="", lowRange=10, highRange=150, size=800, margin=150, fontSize="16px") {
     var graphSize = size - 2 * margin;
     var svg = d3.selectAll("svg").attr("width", size).attr("height", size);
     title = collectOn == ""? title: title + " per " + collectOn;
@@ -24,7 +24,7 @@
         } else {
           X = graphSize * Math.log10(data["AverageCityMPG"] / lowRange) / Math.log10(highRange/lowRange)
           Y = graphSize * Math.log10(data["AverageHighwayMPG"] / lowRange) / Math.log10(highRange/lowRange)
-          g.append("circle").attr("cx",function(a) {return X;}).attr("cy", function (a) {return graphSize -Y;}).attr("r", function(a) {return 8;}).style("fill", "red");
+          g.append("circle").attr("cx",function(a) {return X;}).attr("cy", function (a) {return graphSize -Y;}).attr("r", function(a) {return 8;}).style("fill", "red").append("svg:title").text(data["Make"]);
         }
       }
     }).then(function(notUsed) {
@@ -55,7 +55,7 @@
             return 8;
           }).style("fill", function () {
             return "hsl(" + (360 * i / numKeys).toString() + ", 100%, 50%)";
-          });
+          }).append("svg:title").text(key);
           svg.append("circle").attr("cx", size - margin + 25).attr("cy", i * 10 + margin).attr("r", 4).style("fill", function () {
             return "hsl(" + (360 * i / numKeys).toString() + ", 100%, 50%)";
           });
