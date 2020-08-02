@@ -59,10 +59,10 @@
           }).style("fill", function () {
             return "hsl(" + (360 * i / numKeys).toString() + ", 100%, 50%)";
           });
-          svg.append("circle").attr("cx", size - margin + 25).attr("cy", i * 15 + margin).attr("r", 4).style("fill", function () {
+          svg.append("circle").attr("cx", size - margin + 25).attr("cy", i * 10 + margin).attr("r", 4).style("fill", function () {
             return "hsl(" + (360 * i / numKeys).toString() + ", 100%, 50%)";
           });
-          svg.append("text").attr("x", size - margin + 25 + 15).attr("y", i * 15 + margin).text(key).style("font-size", "12px").attr("alignment-baseline", "middle");
+          svg.append("text").attr("x", size - margin + 25 + 15).attr("y", i * 10 + margin).text(key).style("font-size", "10px").attr("alignment-baseline", "middle");
           i = i + 1;
         }
       }
