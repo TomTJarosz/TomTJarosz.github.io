@@ -1,8 +1,8 @@
 
   async function init(ds, filters, title, l=10, h=150, s=300, m=50, fs="12px") {
     var s1 = 2 * s / 3;
-    var svg = d3.selectAll("svg").attr("width", s).attr("height", m / 2).style("font-size", fs).text(title);
-    svg.append("text").attr("x", s/2).attr("y")
+    var svg = d3.selectAll("svg").attr("width", s).attr("height", s);
+    svg.append("text").attr("x", s / 2).attr("y", m / 2).style("font-size", fs).text(title);
     var g = svg.append("g").attr("transform", "translate(" + m.toString() + "," + m.toString() + ")");
     var x = d3.scaleLog().base(10).domain([l,h]).range([0, s1]);
     var y = d3.scaleLog().base(10).domain([l,h]).range([s1, 0]);
