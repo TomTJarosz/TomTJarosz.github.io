@@ -1,5 +1,5 @@
 
-  function init(dataSource, filters, title, collectOn="", lowRange=10, highRange=150, size=400, margin=200, fontSize="12px") {
+  function init(dataSource, filters, title, collectOn="", lowRange=10, highRange=150, size=400, margin=50, fontSize="12px") {
     var s1 = 2 * size / 3;
     var svg = d3.selectAll("svg").attr("width", size).attr("height", size);
     svg.append("text").attr("x", size / 2).attr("y", margin / 2).style("font-size", fontSize).text(title);
