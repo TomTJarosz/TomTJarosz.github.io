@@ -32,18 +32,18 @@
           var collection = collectMap[key];
           var meanCityMPG = 0;
           var len = collection.length;
-          _.pluck(collection, "AverageCityMPG").forEach((v) => {
-            meanCityMPG = meanCityMPG + v;
+          collection.forEach((v) => {
+            meanCityMPG = meanCityMPG + (+ v["AverageCityMPG"]);
           })
           meanCityMPG = meanCityMPG / len;
           var meanHighwayMPG = 0;
-          _.pluck(collection, "AverageHighwayMPG").forEach((v) => {
-            meanHighwayMPG = meanHighwayMPG + v;
+          collection.forEach((v) => {
+            meanHighwayMPG = meanHighwayMPG + (+ v["AverageHighwayMPG"]);
           })
           meanHighwayMPG = meanHighwayMPG / len;
           var meanNumCyls = 0;
-          _.pluck(collection, "EngineCylinders").forEach((v) => {
-            meanNumCyls = meanNumCyls + v;
+          collection.forEach((v) => {
+            meanNumCyls = meanNumCyls + (+ v["EngineCylinders"]);
           })
           meanNumCyls = meanNumCyls / len;
 
