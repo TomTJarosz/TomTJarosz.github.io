@@ -58,7 +58,7 @@
           }).style("fill", function () {
             return "hsl(" + (360 * i / numKeys).toString() + ", 100%, 50%)";
           });
-          svg.append("circle").attr("cx", s).attr("cy", i * 15 + margin).attr("r", 4).style("fill", function () {
+          svg.append("circle").attr("cx", size).attr("cy", i * 15 + margin).attr("r", 4).style("fill", function () {
             return "hsl(" + (360 * i / numKeys).toString() + ", 100%, 50%)";
           });
           svg.append("text").attr("x", s + 15).attr("y", i * 15 + margin).text(key).style("font-size", "12px").attr("alignment-baseline", "middle");
