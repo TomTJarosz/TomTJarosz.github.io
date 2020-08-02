@@ -1,5 +1,5 @@
 
-  function init(dataSource, filters, title, collectOn="", lowRange=10, highRange=150, size=400, margin=150, fontSize="12px") {
+  function init(dataSource, filters, title, collectOn="", lowRange=10, highRange=150, size=600, margin=150, fontSize="12px") {
     var graphSize = size - 2 * margin;
     var svg = d3.selectAll("svg").attr("width", size).attr("height", size);
     svg.append("text").attr("x", size / 2).attr("y", margin / 2).style("font-size", fontSize).text(title);
