@@ -1,5 +1,5 @@
 
-  function graphData(dataSource, filters, title, collectOn="", lowRange=10, highRange=150, size=800, margin=180, fontSize="16px") {
+  function graphData(dataSource, filters, title, collectOn="", lowRange=10, highRange=150, size=600, margin=140, fontSize="16px") {
     var graphSize = size - 2 * margin;
     var svg = d3.selectAll("svg").attr("width", size).attr("height", size);
     title = collectOn == ""? title: title + " per " + collectOn;
