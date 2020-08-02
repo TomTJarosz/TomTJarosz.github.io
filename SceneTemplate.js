@@ -1,11 +1,11 @@
 
   function init(dataSource, filters, title, collectOn="", lowRange=10, highRange=150, size=400, margin=50, fontSize="12px") {
-    var s1 = 2 * size / 3;
+    var graphSize = size - 2 * margin;
     var svg = d3.selectAll("svg").attr("width", size).attr("height", size);
     svg.append("text").attr("x", size / 2).attr("y", margin / 2).style("font-size", fontSize).text(title);
     var g = svg.append("g").attr("transform", "translate(" + margin.toString() + "," + margin.toString() + ")");
-    var x = d3.scaleLog().base(10).domain([lowRange,highRange]).range([0, s1]);
-    var y = d3.scaleLog().base(10).domain([lowRange,highRange]).range([s1, 0]);
+    var x = d3.scaleLog().base(10).domain([lowRange,highRange]).range([0, graphSize]);
+    var y = d3.scaleLog().base(10).domain([lowRange,highRange]).range([graphSize, 0]);
     d3.select("svg").append("g").attr("transform", "translate(" + margin.toString() + "," + margin.toString() + ")").call(d3.axisLeft(y).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s")));
     d3.select("svg").append("g").attr("transform", "translate(" + margin.toString() + "," + (size - margin).toString() + ")").call(d3.axisBottom(x).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s")));
     var collectMap = {};
@@ -19,9 +19,9 @@
           collection.push(data);
           collectMap[key] = collection;
         } else {
-          X = s1 * Math.log10(data["AverageCityMPG"] / lowRange) / Math.log10(highRange/lowRange)
-          Y = s1 * Math.log10(data["AverageHighwayMPG"] / lowRange) / Math.log10(highRange/lowRange)
-          g.append("circle").attr("cx",function(a) {return X;}).attr("cy", function (a) {return s1 -Y;}).attr("r", function(a) {return +data["EngineCylinders"] + 2;})
+          X = graphSize * Math.log10(data["AverageCityMPG"] / lowRange) / Math.log10(highRange/lowRange)
+          Y = graphSize * Math.log10(data["AverageHighwayMPG"] / lowRange) / Math.log10(highRange/lowRange)
+          g.append("circle").attr("cx",function(a) {return X;}).attr("cy", function (a) {return graphSize -Y;}).attr("r", function(a) {return +data["EngineCylinders"] + 2;})
         }
       }
     }).then(function(notUsed) {
@@ -47,12 +47,12 @@
           })
           meanNumCyls = meanNumCyls / len;
 
-          X = s1 * Math.log10(meanCityMPG / lowRange) / Math.log10(highRange / lowRange);
-          Y = s1 * Math.log10(meanHighwayMPG / lowRange) / Math.log10(highRange / lowRange);
+          X = graphSize * Math.log10(meanCityMPG / lowRange) / Math.log10(highRange / lowRange);
+          Y = graphSize * Math.log10(meanHighwayMPG / lowRange) / Math.log10(highRange / lowRange);
           g.append("circle").attr("cx", function (a) {
             return X;
           }).attr("cy", function (a) {
-            return s1 - Y;
+            return graphSize - Y;
           }).attr("r", function (a) {
             return +meanNumCyls + 2;
           }).style("fill", function () {
