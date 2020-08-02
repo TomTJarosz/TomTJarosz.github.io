@@ -1,13 +1,13 @@
 
   async function init(ds, filters, title, l=10, h=150, s=300, m=50, fs="12px") {
     var s1 = 2 * s / 3;
-    var svg = d3.selectAll("svg").attr("width", s).attr("height", 0 - (m/2)).style("font-size", fs).text(title);
+    var svg = d3.selectAll("svg").attr("width", s).attr("height", m / 2).style("font-size", fs).text(title);
     svg.append("text").attr("x", s/2).attr("y")
-    var g = svg.append("g").attr("transform", "translate(" + m + "," + m + ")");
+    var g = svg.append("g").attr("transform", "translate(" + m.toString() + "," + m.toString() + ")");
     var x = d3.scaleLog().base(10).domain([l,h]).range([0, s1]);
     var y = d3.scaleLog().base(10).domain([l,h]).range([s1, 0]);
-    d3.select("svg").append("g").attr("transform", "translate(" + m + "," + m + ")").call(d3.axisLeft(y).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s")));
-    d3.select("svg").append("g").attr("transform", "translate(" + m + "," + s - m + ")").call(d3.axisBottom(x).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s")));
+    d3.select("svg").append("g").attr("transform", "translate(" + m.toString() + "," + m.toString() + ")").call(d3.axisLeft(y).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s")));
+    d3.select("svg").append("g").attr("transform", "translate(" + m.toString() + "," + (s - m).toString() + ")").call(d3.axisBottom(x).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s")));
 
 
     d3.csv(ds, function(data) {console.log(data);
